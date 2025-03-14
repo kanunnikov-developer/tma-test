@@ -1,4 +1,3 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
@@ -65,13 +64,11 @@ initializeTelegramSDK();
 
 
 createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
     <TwaAnalyticsProvider
       projectId='44adb760-1dc8-4008-8a55-f7642f3bcf0b'
       apiKey='c809d2b1-1738-4ec2-bee7-a5093d870f69'
-      appName={TrackGroups.MEDIUM}
+      appName='Test'
     >
       <App />
     </TwaAnalyticsProvider>
-  </React.StrictMode>,
 )
