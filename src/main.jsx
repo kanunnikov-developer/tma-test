@@ -2,7 +2,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 
-import { TwaAnalyticsProvider } from '@tonsolutions/telemetree-react';
+import { TrackGroups, TwaAnalyticsProvider } from '@tonsolutions/telemetree-react';
 
 import { init, miniApp, mainButton, shareURL } from '@telegram-apps/sdk';
 
@@ -67,7 +67,7 @@ createRoot(document.getElementById('root')).render(
     <TwaAnalyticsProvider
       projectId='44adb760-1dc8-4008-8a55-f7642f3bcf0b'
       apiKey='c809d2b1-1738-4ec2-bee7-a5093d870f69'
-      appName='Test'
+      trackGroup={TrackGroups.MEDIUM}
     >
       <App />
     </TwaAnalyticsProvider>
