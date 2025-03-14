@@ -20,13 +20,8 @@ const initializeTelegramSDK = async () => {
   } catch (error) {
     console.error('Ошибка инициализации:', error);
   }
-};
-
-
-initializeTelegramSDK();
-miniApp.setHeaderColor('#fcb69f');
-
-// Монтируем главную кнопку
+  miniApp.setHeaderColor('#fcb69f');
+  // Монтируем главную кнопку
     if (mainButton.mount.isAvailable()) {
       mainButton.mount(); // Убедимся, что кнопка установлена
       console.log('Главная кнопка установлена');
@@ -59,6 +54,13 @@ miniApp.setHeaderColor('#fcb69f');
         }
       });
     }
+};
+
+
+initializeTelegramSDK();
+// miniApp.setHeaderColor('#fcb69f');
+
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
