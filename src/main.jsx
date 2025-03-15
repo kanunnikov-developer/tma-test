@@ -9,6 +9,16 @@ import { init, backButton, miniApp, mainButton, shareURL } from "@telegram-apps/
 const initializeTelegramSDK = async () => {
   try {
     await init();
+
+    if (backButton.mount.isAvailable()) {
+      backButton.mount();
+      backButton.isMounted(); // true
+    }
+
+    if (backButton.show.isAvailable()) {
+      backButton.show();
+      backButton.isVisible();
+    }
     
     // Ожидание загрузки Mini App
     if (miniApp.ready.isAvailable()) {
