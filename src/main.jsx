@@ -26,41 +26,6 @@ const initializeTelegramSDK = () => {
       }
       backButton.onClick(listener);
     }
-    
-    // Ожидание загрузки Mini App
-    if (miniApp.ready.isAvailable()) {
-      miniApp.ready();
-    }
-
-    // Установка цвета заголовка после инициализации
-    if (miniApp.setHeaderColor.isAvailable()) {
-      miniApp.setHeaderColor("#fcb69f");
-    }
-
-    // Монтируем главную кнопку
-    if (mainButton.mount.isAvailable()) {
-      mainButton.mount();
-    }
-
-    // Настраиваем параметры кнопки
-    if (mainButton.setParams.isAvailable()) {
-      mainButton.setParams({
-        backgroundColor: "#aa1388",
-        isEnabled: true,
-        isVisible: true,
-        text: "Поделиться очками",
-        textColor: "#000000",
-      });
-    }
-
-    // Добавляем слушатель кликов на кнопку
-    if (mainButton.onClick.isAvailable()) {
-      function listener() {
-       const score = localStorage.getItem("memory-game-score") || 0;
-       shareURL(`Посмотрите! У меня ${score} очков в игре!`);
-      }
-      mainButton.onClick(listener)
-    }
   } catch (error) {
     console.error("Ошибка инициализации:", error);
   }
