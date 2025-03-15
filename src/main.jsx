@@ -19,6 +19,13 @@ const initializeTelegramSDK = async () => {
       backButton.show();
       backButton.isVisible();
     }
+
+    if (backButton.onClick.isAvailable()) {
+      function listener() {
+        miniApp.close();
+      }
+      backButton.onClick(listener);
+    }
     
     // Ожидание загрузки Mini App
     if (miniApp.ready.isAvailable()) {
