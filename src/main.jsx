@@ -30,19 +30,16 @@ const initializeTelegramSDK = async () => {
     // Ожидание загрузки Mini App
     if (miniApp.ready.isAvailable()) {
       await miniApp.ready();
-      console.log("Mini App готово");
     }
 
     // Установка цвета заголовка после инициализации
     if (miniApp.setHeaderColor.isAvailable()) {
       miniApp.setHeaderColor("#fcb69f");
-      console.log("Цвет заголовка установлен");
     }
 
     // Монтируем главную кнопку
     if (mainButton.mount.isAvailable()) {
       mainButton.mount();
-      console.log("Главная кнопка установлена");
     }
 
     // Настраиваем параметры кнопки
@@ -54,21 +51,15 @@ const initializeTelegramSDK = async () => {
         text: "Поделиться очками",
         textColor: "#000000",
       });
-      console.log("Свойства главной кнопки настроены");
     }
 
     // Добавляем слушатель кликов на кнопку
-    if (mainButton.on.isAvailable()) {
-      mainButton.on("click", () => {
-        try {
-          const score = localStorage.getItem("memory-game-score") || 0;
-          shareURL(`Посмотрите! У меня ${score} очков в игре!`);
-          console.log("Окно выбора чата открыто для отправки сообщения.");
-        } catch (error) {
-          console.error("Ошибка при открытии окна выбора чата:", error);
-        }
-      });
-      console.log("Обработчик нажатия на кнопку добавлен");
+    if (mainButton.onClick.isAvailable()) {
+      function listener() {
+       const score = localStorage.getItem("memory-game-score") || 0;
+       shareURL(`Посмотрите! У меня ${score} очков в игре!`);
+      }
+      mainButton.onClick(listener)
     }
   } catch (error) {
     console.error("Ошибка инициализации:", error);
