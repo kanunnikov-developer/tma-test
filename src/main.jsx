@@ -1,74 +1,71 @@
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
 
-import { TrackGroups, TwaAnalyticsProvider } from '@tonsolutions/telemetree-react';
+import { TrackGroups, TwaAnalyticsProvider } from "@tonsolutions/telemetree-react";
 
-import { init, miniApp, mainButton, shareURL } from '@telegram-apps/sdk';
-
+import { init, backButton, miniApp, mainButton, shareURL } from "@telegram-apps/sdk";
 
 const initializeTelegramSDK = async () => {
   try {
     await init();
-
-
+    
+    // Ожидание загрузки Mini App
     if (miniApp.ready.isAvailable()) {
       await miniApp.ready();
-      console.log('Mini App готово');
+      console.log("Mini App готово");
     }
 
+    // Установка цвета заголовка после инициализации
+    if (miniApp.setHeaderColor.isAvailable()) {
+      miniApp.setHeaderColor("#fcb69f");
+      console.log("Цвет заголовка установлен");
+    }
 
-  } catch (error) {
-    console.error('Ошибка инициализации:', error);
-  }
-  miniApp.setHeaderColor('#fcb69f');
-  // Монтируем главную кнопку
+    // Монтируем главную кнопку
     if (mainButton.mount.isAvailable()) {
-      mainButton.mount(); // Убедимся, что кнопка установлена
-      console.log('Главная кнопка установлена');
+      mainButton.mount();
+      console.log("Главная кнопка установлена");
     }
 
-
-    // Настраиваем свойства главной кнопки
+    // Настраиваем параметры кнопки
     if (mainButton.setParams.isAvailable()) {
       mainButton.setParams({
-        backgroundColor: '#aa1388', // Цвет кнопки
-        isEnabled: true, // Кнопка активна
-        isVisible: true, // Кнопка видима
-        text: 'Поделиться очками', // Текст на кнопке
-        textColor: '#000000', // Цвет текста
+        backgroundColor: "#aa1388",
+        isEnabled: true,
+        isVisible: true,
+        text: "Поделиться очками",
+        textColor: "#000000",
       });
-      console.log('Свойства главной кнопки настроены');
+      console.log("Свойства главной кнопки настроены");
     }
-
 
     // Добавляем слушатель кликов на кнопку
-    if (mainButton.onClick.isAvailable()) {
-      mainButton.on('click', () => {
+    if (mainButton.on.isAvailable()) {
+      mainButton.on("click", () => {
         try {
-          // Получение текущих очков из localStorage
-          const score = localStorage.getItem('memory-game-score') || 0;
+          const score = localStorage.getItem("memory-game-score") || 0;
           shareURL(`Посмотрите! У меня ${score} очков в игре!`);
-          console.log('Окно выбора чата открыто для отправки сообщения.');
+          console.log("Окно выбора чата открыто для отправки сообщения.");
         } catch (error) {
-          console.error('Ошибка при открытии окна выбора чата:', error);
+          console.error("Ошибка при открытии окна выбора чата:", error);
         }
       });
+      console.log("Обработчик нажатия на кнопку добавлен");
     }
+  } catch (error) {
+    console.error("Ошибка инициализации:", error);
+  }
 };
 
-
 initializeTelegramSDK();
-// miniApp.setHeaderColor('#fcb69f');
 
-
-
-createRoot(document.getElementById('root')).render(
-    <TwaAnalyticsProvider
-      projectId='44adb760-1dc8-4008-8a55-f7642f3bcf0b'
-      apiKey='c809d2b1-1738-4ec2-bee7-a5093d870f69'
-      trackGroup={TrackGroups.MEDIUM}
-    >
-      <App />
-    </TwaAnalyticsProvider>
-)
+createRoot(document.getElementById("root")).render(
+  <TwaAnalyticsProvider
+    projectId="44adb760-1dc8-4008-8a55-f7642f3bcf0b"
+    apiKey="c809d2b1-1738-4ec2-bee7-a5093d870f69"
+    trackGroup={TrackGroups.MEDIUM}
+  >
+    <App />
+  </TwaAnalyticsProvider>
+);
