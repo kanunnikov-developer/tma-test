@@ -1,7 +1,6 @@
 import React, { useReducer, useEffect } from 'react';
 import './App.css';
 
-
 const generateDeck = () => {
   const colors = ['#FF6347', '#4682B4', '#32CD32', '#FFD700', '#FF69B4', '#8A2BE2'];
   const deck = [];
@@ -108,7 +107,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Memory Game</h1>
+      <h1>Найди карточки</h1>
       <div className="info">
         <p>Очки: {state.score}</p>
         <p>Попытки: {state.turns}/15</p>

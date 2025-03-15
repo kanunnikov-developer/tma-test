@@ -4,11 +4,11 @@ import App from "./App.jsx";
 
 import { TrackGroups, TwaAnalyticsProvider } from "@tonsolutions/telemetree-react";
 
-import { init, backButton, miniApp, mainButton, shareURL } from "@telegram-apps/sdk";
+ import { init, backButton, miniApp, mainButton, shareURL } from "@telegram-apps/sdk";
 
-const initializeTelegramSDK = async () => {
+const initializeTelegramSDK = () => {
   try {
-    await init();
+    init();
 
     if (backButton.mount.isAvailable()) {
       backButton.mount();
@@ -29,7 +29,7 @@ const initializeTelegramSDK = async () => {
     
     // Ожидание загрузки Mini App
     if (miniApp.ready.isAvailable()) {
-      await miniApp.ready();
+      miniApp.ready();
     }
 
     // Установка цвета заголовка после инициализации
@@ -74,6 +74,6 @@ createRoot(document.getElementById("root")).render(
     apiKey="c809d2b1-1738-4ec2-bee7-a5093d870f69"
     trackGroup={TrackGroups.MEDIUM}
   >
-    <App />
+     <App />
   </TwaAnalyticsProvider>
 );
