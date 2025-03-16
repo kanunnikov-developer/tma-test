@@ -1,25 +1,29 @@
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.jsx";
+
 
 import { TrackGroups, TwaAnalyticsProvider } from "@tonsolutions/telemetree-react";
 
  import { init, backButton, miniApp, mainButton, shareURL } from "@telegram-apps/sdk";
+import { Home } from "../pages/Home/Home";
 
 const initializeTelegramSDK = () => {
   try {
     init();
 
+    //Монтируем кнопку "Назад"
     if (backButton.mount.isAvailable()) {
       backButton.mount();
       backButton.isMounted(); // true
     }
 
+    //Показываем кнопку "Назад"
     if (backButton.show.isAvailable()) {
       backButton.show();
       backButton.isVisible();
     }
 
+    //Обрабатываем клик кнопки "Назад"
     if (backButton.onClick.isAvailable()) {
       function listener() {
         miniApp.close();
@@ -39,6 +43,6 @@ createRoot(document.getElementById("root")).render(
     apiKey="c809d2b1-1738-4ec2-bee7-a5093d870f69"
     trackGroup={TrackGroups.MEDIUM}
   >
-     <App />
+     <Home/>
   </TwaAnalyticsProvider>
 );
